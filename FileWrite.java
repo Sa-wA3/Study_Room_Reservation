@@ -1,6 +1,6 @@
 import java.io.*;
 
-public class FileWrite {
+public class FileWrite { //DBの代わりとしてテキストファイルを使用する気でいた
     public static void main(String[] args) {
         try {
             File file = new File("/Users/atware_hirasawa/Documents/Apps/Study_room_reservation/test.txt");
