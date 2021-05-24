@@ -32,10 +32,10 @@ public class StudyRoom {
         if (using_number_count == 0) {
             System.out.println("現在、座席は全て予約可能です。（新型コロナウイルス感染症対策による使用禁止席を除く）");
         } else {
-            System.out.println("以下の座席番号は、予約済みです"); //表示処理を追加（未）
+            System.out.println("以下の座席番号は、予約済みです"); //表示処理を追加（未完成）
             for (int i = 0; i < students_list.length; i++) {
                 if (i % 2 == 0) {
-                    System.out.println((i + 1) + "番：予約済");
+                    System.out.println((i + 1) + "番：使用禁止席");
                 }else {
                     System.out.println((i + 1) + "番：空席");
                 }

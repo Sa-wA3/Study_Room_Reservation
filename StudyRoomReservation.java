@@ -41,7 +41,7 @@ public class StudyRoomReservation {
             }
         } while (seat_num <= 0 || seat_num >= 33);
 
-        System.out.println("予約可能か確認中です。少々お待ちください。");
+        // System.out.println("予約可能か確認中です。少々お待ちください。");
         pauseTime(2000);
 
         if(sr.checkReservation(seat_num) == true) {
