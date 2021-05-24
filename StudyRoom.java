@@ -23,7 +23,7 @@ public class StudyRoom {
 
     public void scan_student(Student student) {
         System.out.println("こんにちは！" + student.getName() + "さん！");
-        System.out.println("今日も勉強頑張りましょう！");
+        System.out.println("今日も勉強頑張っていきましょう！");
     }
 
     public void show_using_seat_number() {
@@ -45,7 +45,7 @@ public class StudyRoom {
         System.out.println("予約可能な座席数は" + (students_list.length / 2 - using_number_count) + "席です。");
     }
 
-    public boolean isReserved(int seat_num) {
+    public boolean checkReservation(int seat_num) {
         boolean canReserved = true;
         if (students_list[seat_num - 1] == 1) {
             System.out.println(seat_num + "番の座席は予約可能です！");
@@ -58,12 +58,15 @@ public class StudyRoom {
     }
 
     public void reserve_seat(int seat_num, int doReserve) {
-        if (doReserve == 1) {
-            System.out.println(seat_num + "番の座席を予約しました！");
-            students_list[seat_num - 1] = 0;
-        }else {
-            System.out.println(seat_num + "番の座席の予約をやめました。");
-        }
+        do {
+            if (doReserve == 1) {
+                System.out.println(seat_num + "番の座席を予約しました！");
+                students_list[seat_num - 1] = 0;
+            }else if ( doReserve == 0) {
+                System.out.println(seat_num + "番の座席の予約をやめました。");
+            }
+        }while (doReserve < 0 || doReserve > 1);
+        
     }
 
     

@@ -13,14 +13,22 @@ public class StudyRoomReservation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StudyRoom sr = new StudyRoom();
-        Student A = new Student("平澤", 123456, 1);
-        Student B = new Student("吉井", 234567, 2);
-        Student C = new Student("西川", 345678, 2);
-        Student D = new Student("中山", 456789, 1);
+        // Student A = new Student("平澤", 123456, 1);
+        // Student B = new Student("吉井", 234567, 2);
+        // Student C = new Student("西川", 345678, 2);
+        // Student D = new Student("中山", 456789, 1);
         int seat_num = 0;;
         int doReserve;
+        String student_name;
+        int student_grade;
+
+        System.out.println("氏名と学年を入力してください");
+        student_name = sc.next();
+        student_grade = sc.nextInt();
         
-        sr.scan_student(B);
+        Student student = new Student(student_name, 123456, student_grade);
+
+        sr.scan_student(student);
         pauseTime(1000);
         sr.show_using_seat_number();
         do {
@@ -36,10 +44,11 @@ public class StudyRoomReservation {
         System.out.println("予約可能かどうか調べるので、少々お待ちください。");
         pauseTime(2000);
 
-        sr.isReserved(seat_num);
-        System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
-        doReserve = sc.nextInt();
-        sr.reserve_seat(seat_num, doReserve);
+        if(sr.checkReservation(seat_num) == true) {
+            System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
+            doReserve = sc.nextInt();
+            sr.reserve_seat(seat_num, sc.nextInt());
+        }
         
     }    
 }
