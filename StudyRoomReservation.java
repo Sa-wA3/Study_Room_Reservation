@@ -21,13 +21,14 @@ public class StudyRoomReservation {
         System.out.println("こんにちは！今日も勉強頑張りましょう！");
         pauseTime(1000);
         sr.show_using_seat_number();
-
         System.out.print("予約したい座席番号を入力してください：");
         seat_num = sc.nextInt();
 
         System.out.println("予約可能かどうか調べるので、少々お待ちください。");
         pauseTime(2000);
+
         sr.isReserved(seat_num);
+        // sr.reserve_seat(seat_num);
         
     }    
 }
