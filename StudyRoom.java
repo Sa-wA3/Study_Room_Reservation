@@ -1,3 +1,5 @@
+import java.util.HashMap;
+
 public class StudyRoom {
     private int students_list[] = new int[32];
 
@@ -58,6 +60,7 @@ public class StudyRoom {
     public void reserve_seat(int seat_num, int doReserve) {
         if (doReserve == 1) {
             System.out.println(seat_num + "番の座席を予約しました！");
+            students_list[seat_num - 1] = 0;
         }else {
             System.out.println(seat_num + "番の座席の予約をやめました。");
         }

@@ -31,7 +31,7 @@ public class StudyRoomReservation {
                 System.out.println("座席番号は1~32番から選択してください。");
                 sc.next();
             }
-        } while (seat_num <= 0 && seat_num >= 33);
+        } while (seat_num <= 0 || seat_num >= 33);
 
         System.out.println("予約可能かどうか調べるので、少々お待ちください。");
         pauseTime(2000);
