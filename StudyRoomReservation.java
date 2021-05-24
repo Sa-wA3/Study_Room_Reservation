@@ -26,7 +26,7 @@ public class StudyRoomReservation {
         student_name = sc.next();
         student_grade = sc.nextInt();
         
-        Student student = new Student(student_name, 123456, student_grade);
+        Student student = new Student(student_name, 123456, student_grade); //認証処理みたいなのもあったらいいな（未）
 
         sr.scan_student(student);
         pauseTime(1000);
@@ -41,13 +41,13 @@ public class StudyRoomReservation {
             }
         } while (seat_num <= 0 || seat_num >= 33);
 
-        System.out.println("予約可能かどうか調べるので、少々お待ちください。");
+        System.out.println("予約可能か確認中です。少々お待ちください。");
         pauseTime(2000);
 
         if(sr.checkReservation(seat_num) == true) {
             System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
             doReserve = sc.nextInt();
-            sr.reserve_seat(seat_num, sc.nextInt());
+            sr.reserve_seat(seat_num, doReserve);
         }
         
     }    

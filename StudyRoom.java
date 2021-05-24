@@ -22,16 +22,24 @@ public class StudyRoom {
     }
 
     public void scan_student(Student student) {
-        System.out.println("こんにちは！" + student.getName() + "さん！");
+        System.out.println("会員番号" + student.getMember_id() + "、" + student.getGrade() + "年の" + student.getName() + "さんですね。こんにちは！");
+        // System.out.println("こんにちは！" + student.getName() + "さん！");
         System.out.println("今日も勉強頑張っていきましょう！");
     }
 
     public void show_using_seat_number() {
-        int using_number_count = 0;
+        int using_number_count = 1;
         if (using_number_count == 0) {
             System.out.println("現在、座席は全て予約可能です。（新型コロナウイルス感染症対策による使用禁止席を除く）");
         } else {
-            System.out.println("以下の座席番号は、予約済みです");
+            System.out.println("以下の座席番号は、予約済みです"); //表示処理を追加（未）
+            for (int i = 0; i < students_list.length; i++) {
+                if (i % 2 == 0) {
+                    System.out.println((i + 1) + "番：予約済");
+                }else {
+                    System.out.println((i + 1) + "番：空席");
+                }
+            }
         }
         
         pauseTime(500);
