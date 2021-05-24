@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StudyRoomReservation {
@@ -12,23 +13,33 @@ public class StudyRoomReservation {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         StudyRoom sr = new StudyRoom();
-        // Student A = new Student("平澤", 123456, 1);
-        // Student B = new Student("吉井", 234567, 2);
-        // Student C = new Student("西川", 345678, 2);
-        // Student D = new Student("中山", 456789, 1);
-        int seat_num;
-
-        System.out.println("こんにちは！今日も勉強頑張りましょう！");
+        Student A = new Student("平澤", 123456, 1);
+        Student B = new Student("吉井", 234567, 2);
+        Student C = new Student("西川", 345678, 2);
+        Student D = new Student("中山", 456789, 1);
+        int seat_num = 0;;
+        int doReserve;
+        
+        sr.scan_student(B);
         pauseTime(1000);
         sr.show_using_seat_number();
-        System.out.print("予約したい座席番号を入力してください：");
-        seat_num = sc.nextInt();
+        do {
+            try {
+                System.out.print("予約したい座席番号を入力してください（1番~32番）：");
+                seat_num = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("座席番号は1~32番から選択してください。");
+                sc.next();
+            }
+        } while (seat_num <= 0 && seat_num >= 33);
 
         System.out.println("予約可能かどうか調べるので、少々お待ちください。");
         pauseTime(2000);
 
         sr.isReserved(seat_num);
-        // sr.reserve_seat(seat_num);
+        System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
+        doReserve = sc.nextInt();
+        sr.reserve_seat(seat_num, doReserve);
         
     }    
 }
