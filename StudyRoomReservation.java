@@ -60,9 +60,12 @@ public class StudyRoomReservation {
         pauseTime(1000);
 
         if(sqlite.checkReservation(seat_id) == true) {
-            System.out.print(seat_id + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
+            do {
+                System.out.print(seat_id + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
             doReserve = sc.nextInt();
-            sr.reserve_seat(seat_id, doReserve);
+            }while (doReserve < 0 || doReserve > 1);
+            
+            sqlite.reserve_seat(seat_id, student_name, student_grade,  doReserve);
         }
         // if(sr.checkReservation(seat_num) == true) {
         //     System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
