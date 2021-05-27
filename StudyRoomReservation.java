@@ -58,15 +58,19 @@ public class StudyRoomReservation {
 
         // System.out.println("予約可能か確認中です。少々お待ちください。");
         pauseTime(1000);
-
-        if(sqlite.checkReservation(seat_id) == true) {
-            do {
-                System.out.print(seat_id + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
-            doReserve = sc.nextInt();
-            }while (doReserve < 0 || doReserve > 1);
-            
-            sqlite.reserve_seat(seat_id, student_name, student_grade,  doReserve);
+        try {
+            if(sqlite.checkReservation(seat_id) == true) {
+                do {
+                    System.out.print(seat_id + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
+                doReserve = sc.nextInt();
+                }while (doReserve < 0 || doReserve > 1);
+                
+                sqlite.reserve_seat(seat_id, student.getName(), student.getGrade(), doReserve);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        
         // if(sr.checkReservation(seat_num) == true) {
         //     System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
         //     doReserve = sc.nextInt();
