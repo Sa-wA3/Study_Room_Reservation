@@ -53,17 +53,17 @@ public class StudyRoom {
     //     System.out.println("予約可能な座席数は" + (students_list.length / 2 - using_number_count) + "席です。");
     // }
 
-    public boolean checkReservation(int seat_num) {
-        boolean canReserved = true;
-        if (students_list[seat_num - 1] == 1) {
-            System.out.println(seat_num + "番の座席は予約可能です！");
-            canReserved = true;
-        }else if (students_list[seat_num - 1] == -1 || students_list[seat_num - 1] == 0) {
-            System.out.println(seat_num + "番の座席は既に予約済みか、新型コロナウイルス感染症対策のため使用できない座席です...。別の座席を予約してください。");
-            canReserved = false;
-        }
-        return canReserved;
-    }
+    // public boolean checkReservation(int seat_num) {
+    //     boolean canReserved = true;
+    //     if (students_list[seat_num - 1] == 1) {
+    //         System.out.println(seat_num + "番の座席は予約可能です！");
+    //         canReserved = true;
+    //     }else if (students_list[seat_num - 1] == -1 || students_list[seat_num - 1] == 0) {
+    //         System.out.println(seat_num + "番の座席は既に予約済みか、新型コロナウイルス感染症対策のため使用できない座席です...。別の座席を予約してください。");
+    //         canReserved = false;
+    //     }
+    //     return canReserved;
+    // }
 
     public void reserve_seat(int seat_num, int doReserve) {
         do {
