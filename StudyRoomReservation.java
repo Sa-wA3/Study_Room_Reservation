@@ -35,6 +35,8 @@ public class StudyRoomReservation {
             conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
             System.out.println("Connection to " + dbname + " is succeeded.");
             stmt = conn.createStatement();
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM reservation WHERE student_id = 1");
             // stmt.executeUpdate("CREATE TABLE reservation (student_id INTEGER NOT NULL, name VARCHAR(20) NOT NULL, grade INTEGER NOT NULL, PRIMARY KEY (student_id))");
             // System.out.println("Create reservation table.");
 
@@ -44,8 +46,6 @@ public class StudyRoomReservation {
             // stmt.executeUpdate("INSERT INTO reservation VALUES(4, 'Kei', 2)");
             // System.out.println("Completed data insertation.");
 
-            ResultSet rs = stmt
-                    .executeQuery("SELECT * FROM reservation WHERE student_id = 1");
             // System.out.println("選択");
             System.out.println("Show reservation table.");
             while (rs.next()) {
