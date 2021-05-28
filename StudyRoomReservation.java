@@ -17,35 +17,44 @@ public class StudyRoomReservation {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StudyRoom sr = new StudyRoom();
-        SQLite sqlite = new SQLite();
-        // Student A = new Student("平澤", 123456, 1);
-        // Student B = new Student("吉井", 234567, 2);
-        // Student C = new Student("西川", 345678, 2);
-        // Student D = new Student("中山", 456789, 1);
-        int seat_id = 0;
-        int doReserve;
-        String student_name;
-        int student_grade;
-        
-        
-        System.out.println("氏名と学年を入力してください");
-        student_name = sc.next();
-        student_grade = sc.nextInt();
-        
-        Student student = new Student(student_name, 123456, student_grade); //認証処理みたいなのもあったらいいな（未）
+        ReserveOperation ro = new ReserveOperation();
 
-        sr.scan_student(student);
+        int initialize = 0;
+        do {
+            System.out.print("現在の予約状況を初期化しますか？（1：はい / 0：いいえ）：");
+            initialize = sc.nextInt();
+        } while (initialize < 0 || initialize > 1);
+        
+        if (initialize == 1) {
+            try {
+                ro.reservation_initialize();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        
+        System.out.print("氏名を入力してください：");
+        String student_name = sc.next();
+        System.out.print("学年を入力してください：");
+        int student_grade = sc.nextInt();
+        System.out.print("生徒番号をを入力してください：");
+        int student_id = sc.nextInt();
+        Student student = new Student(student_name, student_id, student_grade); //認証処理みたいなのもあったらいいな：studentテーブル作成（予定）
+
+        ro.scan_student(student);
+        
         pauseTime(1000);
+
         try {
-            sqlite.show_using_seat_number();    
+            ro.show_using_seat_number();    
         } catch (SQLException e) {
             e.printStackTrace();
         }
         
-        // sr.show_using_seat_number();
+        
 
-
+        int seat_id = 0;;
         do {
             try {
                 System.out.print("予約したい座席番号を入力してください（1番~32番）：");
@@ -56,26 +65,20 @@ public class StudyRoomReservation {
             }
         } while (seat_id <= 0 || seat_id >= 33);
 
-        // System.out.println("予約可能か確認中です。少々お待ちください。");
         pauseTime(1000);
+
+        int doReserve;
         try {
-            if(sqlite.checkReservation(seat_id) == true) {
+            if(ro.checkReservation(seat_id) == true) {
                 do {
                     System.out.print(seat_id + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
                 doReserve = sc.nextInt();
                 }while (doReserve < 0 || doReserve > 1);
                 
-                sqlite.reserve_seat(seat_id, student.getName(), student.getGrade(), doReserve);
+                ro.reserve_seat(seat_id, student.getName(), student.getGrade(), doReserve);
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        
-        // if(sr.checkReservation(seat_num) == true) {
-        //     System.out.print(seat_num + "番の座席を予約しますか？（1：はい / 0：いいえ）：");
-        //     doReserve = sc.nextInt();
-        //     sr.reserve_seat(seat_num, doReserve);
-        // }
-        
+        }        
     }    
 }
