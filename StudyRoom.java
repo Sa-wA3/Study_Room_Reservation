@@ -21,11 +21,11 @@ public class StudyRoom {
         }
     }
 
-    public void scan_student(Student student) {
-        System.out.println("会員番号" + student.getMember_id() + "、" + student.getGrade() + "年の" + student.getName() + "さんですね。こんにちは！");
-        // System.out.println("こんにちは！" + student.getName() + "さん！");
-        System.out.println("今日も勉強頑張っていきましょう！");
-    }
+    // public void scan_student(Student student) {
+    //     System.out.println("会員番号" + student.getMember_id() + "、" + student.getGrade() + "年の" + student.getName() + "さんですね。こんにちは！");
+    //     // System.out.println("こんにちは！" + student.getName() + "さん！");
+    //     System.out.println("今日も勉強頑張っていきましょう！");
+    // }
 
     // public void show_using_seat_number() {
     //     int using_number_count = 1;

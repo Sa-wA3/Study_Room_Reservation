@@ -17,8 +17,8 @@ public class StudyRoomReservation {
     }
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        StudyRoom sr = new StudyRoom();
-        SQLite sqlite = new SQLite();
+        // StudyRoom sr = new StudyRoom();
+        ReserveOperation sqlite = new ReserveOperation();
         int seat_id = 0;
         int initialize = 0;
         int doReserve;
@@ -43,9 +43,12 @@ public class StudyRoomReservation {
         student_name = sc.next();
         student_grade = sc.nextInt();
         
-        Student student = new Student(student_name, 123456, student_grade); //認証処理みたいなのもあったらいいな（未）
+        Student student = new Student(student_name, 123456, student_grade); //認証処理みたいなのもあったらいいな：studentテーブル作成（予定）
 
-        sr.scan_student(student);
+        sqlite.scan_student(student);
+        System.out.println("会員番号" + student.getMember_id() + "、" + student.getGrade() + "年の" + student.getName() + "さんですね。こんにちは！");
+        System.out.println("今日も勉強頑張っていきましょう！");
+
         pauseTime(1000);
         try {
             sqlite.show_using_seat_number();    

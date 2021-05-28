@@ -11,38 +11,24 @@ public class ReserveOperation {
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
 
-    
+
 
     static void reservation_initialize() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC"); 
             conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
-            System.out.println(dbname + "への接続完了。");
             stmt = conn.createStatement();
-            stmt.executeUpdate("UPDATE reservation SET grade = ' '");
-            stmt.executeUpdate("UPDATE reservation SET student_name = ' '");
-            // for (int i = 1 ; i <= 31; i++) {
-            //     if(i % 2 == 0) {
-            //         stmt.executeUpdate("update reservation set canUse = 'Available' WHERE seat_id = " + i);
-            //     }else {
-            //         stmt.executeUpdate("UPDATE reservation SET canUse = 'prohibited' WHERE seat_id = " + i);
-            //     }
+            stmt.executeUpdate("UPDATE reservation SET grade = ' ';");
+            stmt.executeUpdate("UPDATE reservation SET student_name = ' ';");
+            for (int i = 1 ; i <= 32; i++) {
+                if(i % 2 == 0) {
+                    stmt.executeUpdate("update reservation set canUse = 'Available' WHERE seat_id = " + i);
+                }else {
+                    stmt.executeUpdate("UPDATE reservation SET canUse = 'prohibited' WHERE seat_id = " + i);
+                }
                 
-            // }
-            stmt.executeUpdate("UPDATE reservation SET canUse = 'prohibited' WHERE seat_id = 4");
-
-            ResultSet rs = stmt
-                    .executeQuery("SELECT * FROM reservation");
-            System.out.println("座席の使用状況を表示します。");
-            System.out.println("seat_id" + "\t" + "name" + "\t" + "grade" + "\t" + "canUse");
-            while (rs.next()) {
-                int seat_id = rs.getInt("seat_id");
-                String name = rs.getString("student_name");
-                int grade = rs.getInt("grade");
-                String canUse = rs.getString("canUse");
-                System.out.println(seat_id + "\t" + name + "\t" + grade + "\t" + canUse);
             }
-            rs.close();
+            System.out.println(dbname + "の初期化が完了しました。");
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -59,6 +45,11 @@ public class ReserveOperation {
         } 
     }
         
+    static void scan_student(Student student) {
+            System.out.println("会員番号" + student.getMember_id() + "、" + student.getGrade() + "年の" + student.getName() + "さんですね。こんにちは！");
+            System.out.println("今日も勉強頑張っていきましょう！");
+        }
+
     static void show_using_seat_number() throws SQLException {
         try {
             Class.forName("org.sqlite.JDBC"); 
@@ -104,7 +95,7 @@ public class ReserveOperation {
             ResultSet rs = stmt
                     .executeQuery("SELECT * FROM reservation WHERE seat_id = " + seat_id);
             if(rs.getString("canUse").equals("Available")) {
-                System.out.println(seat_id + "番の座席は予約可能です！");
+                // System.out.println(seat_id + "番の座席は予約可能です！");
                 canReserved = true;
             }else if (rs.getString("canUse").equals("prohibited")) {
                 System.out.println(seat_id + "番の座席は新型コロナウイルス感染症対策のため使用できない座席です...。別の座席を予約してください。");
