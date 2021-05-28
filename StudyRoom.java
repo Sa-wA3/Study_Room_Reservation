@@ -65,17 +65,17 @@ public class StudyRoom {
     //     return canReserved;
     // }
 
-    public void reserve_seat(int seat_num, int doReserve) {
-        do {
-            if (doReserve == 1) {
-                System.out.println(seat_num + "番の座席を予約しました！");
-                students_list[seat_num - 1] = 0;
-            }else if ( doReserve == 0) {
-                System.out.println(seat_num + "番の座席の予約をやめました。");
-            }
-        }while (doReserve < 0 || doReserve > 1);
+    // public void reserve_seat(int seat_num, int doReserve) {
+    //     do {
+    //         if (doReserve == 1) {
+    //             System.out.println(seat_num + "番の座席を予約しました！");
+    //             students_list[seat_num - 1] = 0;
+    //         }else if ( doReserve == 0) {
+    //             System.out.println(seat_num + "番の座席の予約をやめました。");
+    //         }
+    //     }while (doReserve < 0 || doReserve > 1);
         
-    }
+    // }
 
     
 

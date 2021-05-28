@@ -19,15 +19,25 @@ public class StudyRoomReservation {
         Scanner sc = new Scanner(System.in);
         StudyRoom sr = new StudyRoom();
         SQLite sqlite = new SQLite();
-        // Student A = new Student("平澤", 123456, 1);
-        // Student B = new Student("吉井", 234567, 2);
-        // Student C = new Student("西川", 345678, 2);
-        // Student D = new Student("中山", 456789, 1);
         int seat_id = 0;
+        int initialize = 0;
         int doReserve;
         String student_name;
         int student_grade;
+
+        do {
+            System.out.print("現在の予約状況を初期化しますか？（1：はい / 0：いいえ）：");
+            initialize = sc.nextInt();
+        } while (initialize < 0 || initialize > 1);
         
+        if (initialize == 1) {
+            try {
+                sqlite.reservation_initialize();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         
         System.out.println("氏名と学年を入力してください");
         student_name = sc.next();

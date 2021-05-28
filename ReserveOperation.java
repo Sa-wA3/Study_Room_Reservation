@@ -5,15 +5,58 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.PreparedStatement;
 
-public class SQLite {
+public class ReserveOperation {
     static String dbname = "reservation.db"; // 利用するデータベースファイル
     static Connection conn = null; 
     static Statement stmt = null;
     static PreparedStatement pstmt = null;
 
     
-    SQLite() {
-        
+
+    static void reservation_initialize() throws SQLException {
+        try {
+            Class.forName("org.sqlite.JDBC"); 
+            conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
+            System.out.println(dbname + "への接続完了。");
+            stmt = conn.createStatement();
+            stmt.executeUpdate("UPDATE reservation SET grade = ' '");
+            stmt.executeUpdate("UPDATE reservation SET student_name = ' '");
+            // for (int i = 1 ; i <= 31; i++) {
+            //     if(i % 2 == 0) {
+            //         stmt.executeUpdate("update reservation set canUse = 'Available' WHERE seat_id = " + i);
+            //     }else {
+            //         stmt.executeUpdate("UPDATE reservation SET canUse = 'prohibited' WHERE seat_id = " + i);
+            //     }
+                
+            // }
+            stmt.executeUpdate("UPDATE reservation SET canUse = 'prohibited' WHERE seat_id = 4");
+
+            ResultSet rs = stmt
+                    .executeQuery("SELECT * FROM reservation");
+            System.out.println("座席の使用状況を表示します。");
+            System.out.println("seat_id" + "\t" + "name" + "\t" + "grade" + "\t" + "canUse");
+            while (rs.next()) {
+                int seat_id = rs.getInt("seat_id");
+                String name = rs.getString("student_name");
+                int grade = rs.getInt("grade");
+                String canUse = rs.getString("canUse");
+                System.out.println(seat_id + "\t" + name + "\t" + grade + "\t" + canUse);
+            }
+            rs.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) {
+                    stmt.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } 
     }
         
     static void show_using_seat_number() throws SQLException {
