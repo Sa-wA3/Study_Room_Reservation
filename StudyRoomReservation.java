@@ -40,7 +40,7 @@ public class StudyRoomReservation {
         int student_grade = sc.nextInt();
         System.out.print("生徒番号をを入力してください：");
         int student_id = sc.nextInt();
-        Student student = new Student(student_name, student_id, student_grade); //認証処理みたいなのもあったらいいな：studentテーブル作成（予定）
+        Student student = new Student(student_name, student_id, student_grade);
 
         ro.scan_student(student);
         
