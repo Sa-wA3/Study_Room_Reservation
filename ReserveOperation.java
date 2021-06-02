@@ -45,45 +45,45 @@ public class ReserveOperation {
         } 
     }
         
-    static void scan_student(Student student) { //生徒の在籍を確認する
+    // static void scan_student(Student student) { //生徒の在籍を確認する
         
-        try {
-            Class.forName("org.sqlite.JDBC"); 
-            conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
-            stmt = conn.createStatement();
+    //     try {
+    //         Class.forName("org.sqlite.JDBC"); 
+    //         conn = DriverManager.getConnection("jdbc:sqlite:" + dbname);
+    //         stmt = conn.createStatement();
             
 
-            ResultSet record_counter = stmt
-                    .executeQuery(" SELECT COUNT(*) AS record_count FROM students;");
-            int record_number = record_counter.getInt("record_count");
-            System.out.println(student.getName() + "さんを認証しています。");
-            for(int i = 1; i <= record_number; i++) {
-                ResultSet student_authrization = stmt
-                    .executeQuery(" SELECT student_name FROM students WHERE student_id = " + i + ";");
-                if (student_authrization.getString("student_name").equals(student.getName())) {
-                    System.out.println("会員番号" + student.getName());
-                }
+    //         ResultSet record_counter = stmt
+    //                 .executeQuery(" SELECT COUNT(*) AS record_count FROM students;");
+    //         int record_number = record_counter.getInt("record_count");
+    //         System.out.println(student.getName() + "さんを認証しています。");
+    //         for(int i = 1; i <= record_number; i++) {
+    //             ResultSet student_authrization = stmt
+    //                 .executeQuery(" SELECT student_name FROM students WHERE student_id = " + i + ";");
+    //             if (student_authrization.getString("student_name").equals(student.getName())) {
+    //                 System.out.println("会員番号" + student.getName());
+    //             }
                 
-            }
+    //         }
     
-            record_counter.close();
+    //         record_counter.close();
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (stmt != null) {
-                    stmt.close();
-                }
-                if (conn != null) {
-                    conn.close();
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    //     } catch (Exception e) {
+    //         e.printStackTrace();
+    //     } finally {
+    //         try {
+    //             if (stmt != null) {
+    //                 stmt.close();
+    //             }
+    //             if (conn != null) {
+    //                 conn.close();
+    //             }
+    //         } catch (SQLException e) {
+    //             e.printStackTrace();
+    //         }
+    //     }
     
-    }
+    // }
 
     static void show_using_seat_number() throws SQLException {
 
