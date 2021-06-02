@@ -45,7 +45,7 @@ public class ReserveOperation {
         } 
     }
         
-    static void scan_student(Student student) {
+    static void scan_student(Student student) { //生徒の在籍を確認する
         
         try {
             Class.forName("org.sqlite.JDBC"); 
@@ -56,18 +56,11 @@ public class ReserveOperation {
             ResultSet record_counter = stmt
                     .executeQuery(" SELECT COUNT(*) AS record_count FROM students;");
             int record_number = record_counter.getInt("record_count");
+            System.out.println(student.getName() + "さんを認証しています。");
             for(int i = 1; i <= record_number; i++) {
                 ResultSet student_authrization = stmt
                     .executeQuery(" SELECT student_name FROM students WHERE student_id = " + i + ";");
-                System.out.println(student_authrization.getString("student_name"));
-                if(student_authrization.getString("student_name").equals(student.getName())) {
-                    System.out.println("生徒番号" + student.getMember_id() + "番、" + student.getGrade() + "年の" + student.getName() + "さんですね！こんにちは！");
-                    System.out.println("今日も勉強頑張っていきましょう！");
-                    break;
-                }else {
-                    System.out.println("会員ではありません。");
-                    System.exit(0);
-                }
+                
             }
     
             record_counter.close();
