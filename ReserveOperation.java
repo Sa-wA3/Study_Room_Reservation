@@ -60,6 +60,9 @@ public class ReserveOperation {
             for(int i = 1; i <= record_number; i++) {
                 ResultSet student_authrization = stmt
                     .executeQuery(" SELECT student_name FROM students WHERE student_id = " + i + ";");
+                if (student_authrization.getString("student_name").equals(student.getName())) {
+                    System.out.println("会員番号" + student.getName());
+                }
                 
             }
     
